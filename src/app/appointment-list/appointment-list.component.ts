@@ -22,18 +22,21 @@ export class AppointmentListComponent implements OnInit{
 
 
   addAppointment(){
-    let newAppointment : Appointment = {
-      id: Date.now(),
-      title: this.newAppointmentTitle,
-      date: this.newAppointmentDate
+    if(this.newAppointmentTitle.trim().length && this.newAppointmentDate){
+      let newAppointment : Appointment = {
+        id: Date.now(),
+        title: this.newAppointmentTitle,
+        date: this.newAppointmentDate
 
+      }
+      this.appointments.push(newAppointment);
+
+      this.newAppointmentTitle = "";
+      this.newAppointmentDate = new Date();
+
+      localStorage.setItem("appointments", JSON.stringify(this.appointments));
     }
-    this.appointments.push(newAppointment);
 
-    this.newAppointmentTitle = "";
-    this.newAppointmentDate = new Date();
-
-    localStorage.setItem("appointments", JSON.stringify(this.appointments));
 
     // alert(this.appointments.length);
   }
